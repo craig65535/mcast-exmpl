@@ -138,8 +138,18 @@ int init_module(void)
     _g_connect_probe.entry = (kprobe_opcode_t *)_connect_probe_cb;
     rc = register_jprobe(&_g_connect_probe);
     if (rc != 0) {
-        ret = rc;
         printk(KERN_ERR "%s: register_jprobe failed\n", __func__);
+        ret = rc;
+        goto unreg_genl;
+    }
+
+    /* success */
+    goto done;
+
+unreg_genl:
+    rc = genl_unregister_family(&_g_genl_family);
+    if (rc != 0) {
+        printk(KERN_ERR "%s: genl_unregister_family failed\n", __func__);
     }
 
 done:
