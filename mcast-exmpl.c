@@ -123,7 +123,7 @@ int init_module(void)
 
     printk(KERN_INFO "starting mcast-exmpl\n");
 
-    /* register generic netlink socket */
+    /* register generic netlink family */
     rc = genl_register_family_with_ops_groups(&_g_genl_family,
                                               _g_genl_ops,
                                               _g_genl_mc_groups);
@@ -152,7 +152,7 @@ void cleanup_module(void)
 
     unregister_jprobe(&_g_connect_probe);
 
-    /* unregister generic netlink socket */
+    /* unregister generic netlink family */
     rc = genl_unregister_family(&_g_genl_family);
     if (rc != 0) {
         printk(KERN_ERR "%s: genl_unregister_family failed\n", __func__);
