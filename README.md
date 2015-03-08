@@ -14,7 +14,7 @@ Mcast group ID: 4
 ```
 (IDs may be different)
 
-In another terminal, run a command that will do a TCP connect. mcast-exmpl hooks connects, so doing this will cause it to send a netlink multicast.
+In another terminal, run a command that will do a TCP connect. mcast-exmpl hooks connects via a jprobe, so doing this will cause it to send a netlink multicast.
 ```
 $ nc yahoo.com 80
 ^C
